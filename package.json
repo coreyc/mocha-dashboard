@@ -4,7 +4,7 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "mocha ./tests/**/*.test.js"
+    "test": "mocha ./tests/**/*.test.js --reporter ./src/reporter.js"
   },
   "repository": {
     "type": "git",
@@ -15,5 +15,9 @@
   "dependencies": {
     "blessed": "^0.1.81",
     "blessed-contrib": "^4.8.7"
+  },
+  "devDependencies": {
+    "chai": "^4.2.0",
+    "mocha": "^5.2.0"
   }
 }
