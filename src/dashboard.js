@@ -2,6 +2,18 @@ const blessed = require('blessed')
 const contrib = require('blessed-contrib')
 const screen = blessed.screen()
 
+function Dashboard() {
+  this.screen = screen
+}
+
+// Dashboard.prototype.render = (this) => {
+//   this.screen.render()
+// }
+
+// Dashboard.prototype.bootstrap = (this) => {
+
+// }
+
 const table = contrib.table(
   {
     keys: true,
@@ -15,7 +27,7 @@ const table = contrib.table(
     height: '60%',
     border: { type: "line", fg: "cyan" },
     columnSpacing: 10, //in chars
-    columnWidth: [16, 12, 12] /*in chars*/
+    columnWidth: [16, 8, 8, 8] /*in chars*/
   }
 )
 
@@ -27,8 +39,8 @@ screen.append(table)
 
 table.setData(
   {
-    headers: ['Test file', 'Passed', 'Failed'],
-    data: [[1, 2, 3], [4, 5, 6]]
+    headers: ['Test file', 'Passed', 'Failed', 'Pending'],
+    data: [[1, 2, 3, 4], [5, 6, 7, 8]]
   }
 )
 
@@ -40,3 +52,5 @@ screen.key(['escape', 'q', 'C-c'], (ch, key) => {
 })
 
 screen.render()
+
+module.exports = Dashboard

@@ -3,7 +3,7 @@ const expect = chai.expect
 
 describe('Index', () => {
   describe('#', () => {
-    it('should output something', () => {
+    xit('should output something', () => {
       expect(true).to.be.true
     })
   })
