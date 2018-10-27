@@ -1,0 +1,19 @@
+{
+  "name": "mocha-dashboard",
+  "version": "0.0.1",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "test": "mocha ./tests/**/*.test.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/coreyc/mocha-dashboard.git"
+  },
+  "author": "Corey Cleary",
+  "license": "MIT",
+  "dependencies": {
+    "blessed": "^0.1.81",
+    "blessed-contrib": "^4.8.7"
+  }
+}
