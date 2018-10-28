@@ -15,7 +15,7 @@ const grid = new contrib.grid({rows: 12, cols: 12, screen: screen})
 // Dashboard.prototype.bootstrap = (this) => {
 
 // }
-const table = grid.set(0, 0, 5, 5, contrib.table, {
+const table = grid.set(0, 0, 6, 6, contrib.table, {
   keys: true,
   fg: 'white',
   bg: 'black',
@@ -33,24 +33,29 @@ const table = grid.set(0, 0, 5, 5, contrib.table, {
 //allow control the table with the keyboard
 table.focus()
 
-//must append before setting data
-// screen.append(table)
-
 table.setData({
   headers: ['Test file', 'Passed', 'Failed', 'Pending'],
   data: [[1, 2, 3, 4], [5, 6, 7, 8]]
 })
 
-const log = grid.set(0, 5, 5, 5, contrib.log, {
+const log = grid.set(0, 6, 6, 6, contrib.log, {
   fg: 'green',
   selectedFg: 'green',
-  label: 'Server Log'
+  label: 'Selected Test Output',
+  bufferLength: 1 // allows us to clear out the log on keyup/keydown
 })
 
 log.log('new log line')
+log.log('another line')
 
-// const grid = new contrib.grid({rows: 12, cols: 12, screen: screen})
-// grid.set(0, 0, 0, 0, table, {label: 'Tests'})
+const updateLogOutput = (runInformation = {}) => {
+  log.log(runInformation)
+  // console.log(table.getContent())
+}
+
+screen.key(['up', 'down'], () => {
+  updateLogOutput(JSON.stringify({status: 'failed'})) //this.selectedTestInformation
+})
 
 screen.key(['escape', 'q', 'C-c'], (ch, key) => {
   return process.exit(0)
@@ -58,6 +63,7 @@ screen.key(['escape', 'q', 'C-c'], (ch, key) => {
 
 screen.on('resize', () => {
   table.emit('attach')
+  log.emit('attach')
 })
 
 screen.render()
